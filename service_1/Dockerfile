@@ -1,7 +1,13 @@
-FROM python:3.10-slim
+FROM golang:1.20
+
 WORKDIR /app
+
 COPY . .
-RUN pip install -r requirements.txt
-EXPOSE 5000
-CMD ["python", "app.py"]
+
+# Initialize go.mod before building (module name 'app' is arbitrary)
+RUN go mod init app && go build -o main .
+
+EXPOSE 8001
+
+CMD ["./main"]
 
