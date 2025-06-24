@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-# Initialize go.mod before building (module name 'app' is arbitrary)
 RUN go mod init app && go build -o main .
 
 EXPOSE 8001
